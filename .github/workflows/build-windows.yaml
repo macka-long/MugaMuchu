@@ -1,0 +1,33 @@
+name: Build Unity Game for Windows
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Unity
+        uses: game-ci/unity-actions@v2
+        with:
+          version: 2021.3.28f1  # あなたのUnityバージョンに合わせて変更！
+
+      - name: Build Windows
+        uses: game-ci/unity-builder@v2
+        with:
+          targetPlatform: StandaloneWindows64
+
+      - name: Zip build folder
+        run: Compress-Archive -Path build/StandaloneWindows64/* -DestinationPath WindowsBuild.zip
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: WindowsBuild
+          path: WindowsBuild.zip
