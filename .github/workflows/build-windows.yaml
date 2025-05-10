@@ -13,17 +13,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Build Windows
+      - name: Build with Unity
         uses: game-ci/unity-builder@v2
         with:
           targetPlatform: StandaloneWindows64
-          unityVersion: 6000.0.42f1  # ← プロジェクトに合わせて変更する
+          unityVersion: 6000.0.42f1  # Unity 6 LTS。エラー出たら2022に戻すことも検討
 
       - name: Zip build folder
         run: Compress-Archive -Path build/StandaloneWindows64/* -DestinationPath WindowsBuild.zip
 
       - name: Upload Build Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: WindowsBuild
           path: WindowsBuild.zip
