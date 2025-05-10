@@ -23,7 +23,7 @@ jobs:
         run: Compress-Archive -Path build/StandaloneWindows64/* -DestinationPath WindowsBuild.zip
 
       - name: Upload Build Artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: WindowsBuild
           path: WindowsBuild.zip
