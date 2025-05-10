@@ -13,15 +13,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up Unity
-        uses: game-ci/unity-actions@v2
-        with:
-          version: 2021.3.28f1  # あなたのUnityバージョンに合わせて変更！
-
       - name: Build Windows
         uses: game-ci/unity-builder@v2
         with:
           targetPlatform: StandaloneWindows64
+          unityVersion: 6000.0.42f1  # ← プロジェクトに合わせて変更する
 
       - name: Zip build folder
         run: Compress-Archive -Path build/StandaloneWindows64/* -DestinationPath WindowsBuild.zip
